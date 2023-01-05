@@ -1,24 +1,24 @@
 -- Create new_added table:
 CREATE TABLE IF NOT EXISTS project_1_data (
-                    id                     VARCHAR(250),
-                    status_name            VARCHAR(250),
-                    status                 INTEGER,
-                    status_history         VARCHAR(500),
-                    inserted_at            TIMESTAMP,
-                    tags                   VARCHAR(250),
-                    warehouse_info         VARCHAR(250),
-					partner                VARCHAR(250),
-					shop_id                VARCHAR(250),
-					assigning_seller       VARCHAR(250),
-					updated_at             TIMESTAMP,
-					revenue                NUMERIC(15,3),          
-					id_column              VARCHAR(250) PRIMARY KEY;
+                    	id                     VARCHAR(250),
+                    	status_name            VARCHAR(250),
+                    	status                 INTEGER,
+                    	status_history         VARCHAR(500),
+                    	inserted_at            TIMESTAMP,
+                    	tags                   VARCHAR(250),
+                    	warehouse_info         VARCHAR(250),
+			partner                VARCHAR(250),
+			shop_id                VARCHAR(250),
+			assigning_seller       VARCHAR(250),
+			updated_at             TIMESTAMP,
+			revenue                NUMERIC(15,3),          
+			id_column              VARCHAR(250) PRIMARY KEY;
 
 CREATE TABLE IF NOT EXISTS d_client (
-                    shop_id                VARCHAR(20) PRIMARY KEY,
+                    	shop_id                VARCHAR(20) PRIMARY KEY,
 	                api_key                VARCHAR(200),
-                    shop_name              VARCHAR(50),
-					country                VARCHAR(50));
+                    	shop_name              VARCHAR(50),
+			country                VARCHAR(50));
 
 --------------------------------------------------------------------------------------------------------------------------------------------
 -- Remove bad data:
@@ -43,13 +43,9 @@ CREATE VIEW main_metric AS
 		SUM(CASE WHEN status_name = 'deny' 
 			THEN 1 ELSE 0 END) AS deny_orders,
 		-- Can't connect orders
-		SUM(CASE 
-				WHEN status_name = 'new_added' THEN 1
-				WHEN status_name = 'deny' 
-					AND LOWER(tags) LIKE '%tag: (*Can_not_connect*)%' THEN 1
-				ELSE 0 END) AS can_not_connect_orders,
-				
-		---------------------------------------
+		SUM(CASE WHEN status_name = 'new_added' THEN 1
+			WHEN status_name = 'deny' AND LOWER(tags) LIKE '%tag: (*Can_not_connect*)%' THEN 1
+			ELSE 0 END) AS can_not_connect_orders,
 		-- received order
 		SUM(CASE WHEN status_name = 'received' THEN 1 
 			ELSE 0 END) AS received_orders,

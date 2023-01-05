@@ -1,5 +1,8 @@
 # Order records BI system ETL
 
+![Screenshot 2023-01-05 140411](https://user-images.githubusercontent.com/15308273/210721461-f4f74f6b-fbf2-4476-828d-3b2d7fbe5a21.png)
+
+
 This is an ETL pipeline to extract data from Rest API of an Order records system. You can also modify it and apply it to other platforms. Just make sure to read API doc of the platform first.
 
 ## 1 - Extract 
